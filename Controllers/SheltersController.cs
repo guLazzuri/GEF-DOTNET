@@ -28,7 +28,17 @@ namespace Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Shelter>>> GetShelters()
         {
-            return await _context.Shelters.ToListAsync();
+            try
+            {
+                var shelters = await _context.Shelters.ToListAsync();
+                if (shelters == null || shelters.Count == 0)
+                    return NotFound();
+                return shelters;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao buscar abrigos: {ex.Message}");
+            }
         }
 
         // GET: api/Shelters/5
@@ -41,21 +51,26 @@ namespace Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Shelter>> GetShelter(long id)
         {
-            var shelter = await _context.Shelters
-                .Include(s => s.Users)
-                .FirstOrDefaultAsync(s => s.ShelterID == id);
-
-            if (shelter == null)
+            try
             {
-                return NotFound();
-            }
+                var shelter = await _context.Shelters
+                    .Include(s => s.Users)
+                    .FirstOrDefaultAsync(s => s.ShelterID == id);
 
-            return shelter;
+                if (shelter == null)
+                {
+                    return NotFound();
+                }
+
+                return shelter;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao buscar abrigo: {ex.Message}");
+            }
         }
 
-
         // PUT: api/Shelters/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         /// <summary>
         /// Change shelter by id
         /// </summary>
@@ -66,25 +81,29 @@ namespace Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutShelter(long id, [FromBody] ShelterDto dto)
         {
-            var shelter = await _context.Shelters.FindAsync(id);
-            if (shelter == null)
-                return NotFound();
+            try
+            {
+                var shelter = await _context.Shelters.FindAsync(id);
+                if (shelter == null)
+                    return NotFound();
 
-            // Atualize apenas os campos permitidos
-            shelter.Name = dto.Name;
-            shelter.Address = dto.Address;
-            shelter.Quantity = dto.Quantity;
-            shelter.Capacity = dto.Capacity;
+                // Atualize apenas os campos permitidos
+                shelter.Name = dto.Name;
+                shelter.Address = dto.Address;
+                shelter.Quantity = dto.Quantity;
+                shelter.Capacity = dto.Capacity;
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
-            return NoContent();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao atualizar abrigo: {ex.Message}");
+            }
         }
 
-
-
         // POST: api/Shelters
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         /// <summary>
         /// Create new shelter
         /// </summary>
@@ -95,20 +114,25 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ShelterDto dto)
         {
-            // Mapeia manualmente o DTO para a entidade Shelter
-            var shelter = new Shelter
+            try
             {
-                Name = dto.Name,
-                Address = dto.Address,
-                Quantity = dto.Quantity,
-                Capacity = dto.Capacity
-            };
+                var shelter = new Shelter
+                {
+                    Name = dto.Name,
+                    Address = dto.Address,
+                    Quantity = dto.Quantity,
+                    Capacity = dto.Capacity
+                };
 
-            _context.Shelters.Add(shelter);
-            await _context.SaveChangesAsync();
+                _context.Shelters.Add(shelter);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetShelter", new { id = shelter.ShelterID }, shelter);
-
+                return CreatedAtAction("GetShelter", new { id = shelter.ShelterID }, shelter);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao criar abrigo: {ex.Message}");
+            }
         }
 
         // DELETE: api/Shelters/5
@@ -121,21 +145,23 @@ namespace Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteShelter(long id)
         {
-            var shelter = await _context.Shelters.FindAsync(id);
-            if (shelter == null)
+            try
             {
-                return NotFound();
+                var shelter = await _context.Shelters.FindAsync(id);
+                if (shelter == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Shelters.Remove(shelter);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
             }
-
-            _context.Shelters.Remove(shelter);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool ShelterExists(long id)
-        {
-            return _context.Shelters.Any(e => e.ShelterID == id);
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao remover abrigo: {ex.Message}");
+            }
         }
     }
 }

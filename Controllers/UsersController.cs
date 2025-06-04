@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Api.Domain.Entity;
 using Api.Infrastructure.Context;
-using Api.Dto.Api.Dto;
+using Api.Dto;
 using Api.Domain.Enum;
 
 namespace GEF.Controllers
@@ -33,7 +33,17 @@ namespace GEF.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            try
+            {
+                var users = await _context.Users.ToListAsync();
+                if (users == null || users.Count == 0)
+                    return NotFound();
+                return users;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao buscar usuários: {ex.Message}");
+            }
         }
 
         // GET: api/Users/5
@@ -46,14 +56,21 @@ namespace GEF.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(long id)
         {
-            var user = await _context.Users.FindAsync(id);
-
-            if (user == null)
+            try
             {
-                return NotFound();
-            }
+                var user = await _context.Users.FindAsync(id);
 
-            return user;
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                return user;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao buscar usuário: {ex.Message}");
+            }
         }
 
         // PUT: api/Users/5
@@ -68,25 +85,32 @@ namespace GEF.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(long id, [FromBody] UserDto dto)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-                return NotFound();
+            try
+            {
+                var user = await _context.Users.FindAsync(id);
+                if (user == null)
+                    return NotFound();
 
-            // Atualize apenas os campos permitidos
-            user.Name = dto.Name;
-            user.Age = dto.Age;
-            user.Gender = dto.Gender;
-            user.BloodType = dto.BloodType;
-            user.Weight = dto.Weight;
-            user.ResponsableName = dto.ResponsableName;
-            user.CPF = dto.CPF;
-            user.CardNumber = dto.CardNumber;
-            user.UserType = dto.UserType;
-            user.ShelterID = dto.ShelterID;
+                // Atualize apenas os campos permitidos
+                user.Name = dto.Name;
+                user.Age = dto.Age;
+                user.Gender = dto.Gender;
+                user.BloodType = dto.BloodType;
+                user.Weight = dto.Weight;
+                user.ResponsableName = dto.ResponsableName;
+                user.CPF = dto.CPF;
+                user.CardNumber = dto.CardNumber;
+                user.UserType = dto.UserType;
+                user.ShelterID = dto.ShelterID;
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
-            return NoContent();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao atualizar usuário: {ex.Message}");
+            }
         }
 
 
@@ -102,24 +126,30 @@ namespace GEF.Controllers
         [HttpPost]
         public async Task<IActionResult> PostUser([FromBody] UserDto dto)
         {
-            var user = new User
+            try
             {
-                Name = dto.Name,
-                Age = dto.Age,
-                Gender = dto.Gender,
-                BloodType = dto.BloodType,
-                Weight = dto.Weight,
-                ResponsableName = dto.ResponsableName,
-                CPF = dto.CPF,
-                CardNumber = dto.CardNumber,
-                UserType = dto.UserType,
-                ShelterID = dto.ShelterID
+                var user = new User
+                {
+                    Name = dto.Name,
+                    Age = dto.Age,
+                    Gender = dto.Gender,
+                    BloodType = dto.BloodType,
+                    Weight = dto.Weight,
+                    ResponsableName = dto.ResponsableName,
+                    CPF = dto.CPF,
+                    CardNumber = dto.CardNumber,
+                    UserType = dto.UserType,
+                    ShelterID = dto.ShelterID
+                };
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
 
-            };
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUser", new { id = user.UserID }, user);
+                return CreatedAtAction("GetUser", new { id = user.UserID }, user);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao criar usuário: {ex.Message}");
+            }
         }
 
         // DELETE: api/Users/5
@@ -132,16 +162,23 @@ namespace GEF.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(long id)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            try
             {
-                return NotFound();
+                var user = await _context.Users.FindAsync(id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Users.Remove(user);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
             }
-
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao remover usuário: {ex.Message}");
+            }
         }
 
         private bool UserExists(long id)

@@ -32,7 +32,17 @@ namespace GEF.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Bracelet>>> GetBracelets()
         {
-            return await _context.Bracelets.ToListAsync();
+            try
+            {
+                var bracelets = await _context.Bracelets.ToListAsync();
+                if (bracelets == null || bracelets.Count == 0)
+                    return NotFound();
+                return bracelets;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao buscar pulseiras: {ex.Message}");
+            }
         }
 
         // GET: api/Bracelets/5
@@ -45,14 +55,21 @@ namespace GEF.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Bracelet>> GetBracelet(long id)
         {
-            var bracelet = await _context.Bracelets.FindAsync(id);
-
-            if (bracelet == null)
+            try
             {
-                return NotFound();
-            }
+                var bracelet = await _context.Bracelets.FindAsync(id);
 
-            return bracelet;
+                if (bracelet == null)
+                {
+                    return NotFound();
+                }
+
+                return bracelet;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao buscar pulseira: {ex.Message}");
+            }
         }
 
         // PUT: api/Bracelets/5
@@ -67,18 +84,25 @@ namespace GEF.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBracelet(long id, [FromBody] BraceletDto dto)
         {
-            var bracelet = await _context.Bracelets.FindAsync(id);
-            if (bracelet == null)
-                return NotFound();
+            try
+            {
+                var bracelet = await _context.Bracelets.FindAsync(id);
+                if (bracelet == null)
+                    return NotFound();
 
-            // Atualize apenas os campos permitidos
-            bracelet.UserId = dto.UserId;
-            bracelet.LastBPM = dto.LastBPM;
-            bracelet.LastUpdate = dto.LastUpdate;
+                // Atualize apenas os campos permitidos
+                bracelet.UserId = dto.UserId;
+                bracelet.LastBPM = dto.LastBPM;
+                bracelet.LastUpdate = dto.LastUpdate;
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
-            return NoContent();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao atualizar pulseira: {ex.Message}");
+            }
         }
 
 
@@ -94,18 +118,25 @@ namespace GEF.Controllers
         [HttpPost]
         public async Task<ActionResult<Bracelet>> PostBracelet([FromBody] BraceletDto dto)
         {
-            // Mapeia o DTO para a entidade Bracelet
-            var bracelet = new Bracelet
+            try
             {
-                UserId = dto.UserId,
-                LastBPM = dto.LastBPM,
-                LastUpdate = dto.LastUpdate
-            };
+                // Mapeia o DTO para a entidade Bracelet
+                var bracelet = new Bracelet
+                {
+                    UserId = dto.UserId,
+                    LastBPM = dto.LastBPM,
+                    LastUpdate = dto.LastUpdate
+                };
 
-            _context.Bracelets.Add(bracelet);
-            await _context.SaveChangesAsync();
+                _context.Bracelets.Add(bracelet);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBracelet", new { id = bracelet.BraceletID }, bracelet);
+                return CreatedAtAction("GetBracelet", new { id = bracelet.BraceletID }, bracelet);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao criar pulseira: {ex.Message}");
+            }
         }
 
 
@@ -119,16 +150,23 @@ namespace GEF.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBracelet(long id)
         {
-            var bracelet = await _context.Bracelets.FindAsync(id);
-            if (bracelet == null)
+            try
             {
-                return NotFound();
+                var bracelet = await _context.Bracelets.FindAsync(id);
+                if (bracelet == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Bracelets.Remove(bracelet);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
             }
-
-            _context.Bracelets.Remove(bracelet);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao remover pulseira: {ex.Message}");
+            }
         }
 
         private bool BraceletExists(long id)
