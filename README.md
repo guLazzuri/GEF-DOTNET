@@ -269,50 +269,52 @@ dotnet run
 - **Leitura (GET)**: Todos os endpoints GET funcionando perfeitamente
 - **Listagem**: Retorno completo de dados com relacionamentos
 
-#### ⚠️ **Pontos de Atenção:**
-- **Códigos 204**: Operações PUT e DELETE retornando 204 No Content
-- **Headers de resposta**: Presentes e corretos em todas as requisições
-- **Formato JSON**: Dados estruturados corretamente
 
 #### 📊 **Dados de Teste Utilizados:**
 ```json
 {
   "shelters": [
     {
-      "shelterID": 1,
-      "name": "teste01",
-      "address": "teste01",
-      "quantity": 10,
-      "capacity": 10
-    },
-    {
-      "shelterID": 5,
-      "name": "Teste Funcionando",
-      "address": "Rua Teste Funcionando, 123",
-      "quantity": 123,
-      "capacity": 200
+      "shelterID": 7,
+      "name": "Abrigo 07",
+      "address": "Rua Saúde, 7",
+      "quantity": 33,
+      "capacity": 77
     }
   ],
   "users": [
     {
-      "userID": 12,
-      "name": "Teste Funcionando",
-      "age": 50,
-      "gender": "Masculine",
+      "userID": 16,
+      "name": "Amanda Rodrigues",
+      "age": 41,
+      "gender": "Female",
       "bloodType": "APositive",
-      "weight": 80,
-      "responsableName": "Responsável Teste Funcionando",
-      "cpf": "54776587609",
-      "cardNumber": "12093812",
+      "weight": 66.33,
+      "responsableName": "Thiago Rodrigues",
+      "cpf": "54323456754",
+      "cardNumber": "11212",
       "userType": "PATIENT",
-      "shelterID": 5
+      "shelterID": 7
+    },
+    {
+      "userID": 15,
+      "name": "Felipe Pessoa",
+      "age": 23,
+      "gender": "Massculine",
+      "bloodType": "APositive",
+      "weight": 62.5,
+      "responsableName": "Julia Pessoa",
+      "cpf": "67876565421",
+      "cardNumber": "33033",
+      "userType": "DOCTOR",
+      "shelterID": 7
     }
   ],
   "bracelets": [
     {
-      "braceletID": 12,
-      "userId": 12,
-      "lastBPM": 120,
+      "braceletID": 14,
+      "userId": 16,
+      "lastBPM": 90,
       "lastUpdate": "2025-06-04T13:55:54.532Z"
     }
   ]
