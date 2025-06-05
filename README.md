@@ -168,9 +168,9 @@ A API foi extensivamente testada usando cURL e todos os endpoints estão funcion
 
 ### 📸 Screenshots dos Testes
 
-#### 1. **POST /api/Shelters** - Criação de Abrigo (❌ Erro 204)
-![POST Shelter Error](image-1.png)
-*Tentativa de criação de abrigo com erro 204 - sem corpo de resposta*
+#### 1. **POST /api/Shelters** - Criação de Abrigo 
+![image](https://github.com/user-attachments/assets/e6aefc3a-f8b3-45e4-aab8-80fa49259c35)
+*Criação de abrigo*
 
 #### 2. **GET /api/Shelters** - Listagem de Abrigos (✅ Sucesso)
 ![GET Shelters](image-2.png)
