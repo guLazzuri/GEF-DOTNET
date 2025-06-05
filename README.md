@@ -63,7 +63,6 @@ erDiagram
 
 ## 📦 Estrutura do Projeto
 
-```
 GEF-DOTNET/
 ├── Controllers/
 │   ├── BraceletsController.cs
@@ -93,6 +92,10 @@ GEF-DOTNET/
 │       └── Repositories/
 │           ├── IRepository.cs
 │           └── Repository.cs
+├── Migrations/
+│   ├── 20250604025842_gef.cs
+│   ├── 20250604025842_gef.Designer.cs
+│   └── GefContextModelSnapshot.cs
 └── README.md
 ```
 
