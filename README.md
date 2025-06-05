@@ -172,9 +172,9 @@ A API foi extensivamente testada usando cURL e todos os endpoints estão funcion
 ![image](https://github.com/user-attachments/assets/e6aefc3a-f8b3-45e4-aab8-80fa49259c35)
 *Criação de abrigo*
 
-#### 2. **GET /api/Shelters** - Listagem de Abrigos (✅ Sucesso)
-![GET Shelters](image-2.png)
-*Listagem bem-sucedida de todos os abrigos cadastrados*
+#### 2. **GET /api/Shelters** - Listagem de Abrigos 
+![image](https://github.com/user-attachments/assets/28775ec3-66b5-4f8b-aa2e-26c1ed5702c3)
+*Listagem de todos os abrigos cadastrados*
 
 #### 3. **POST /api/Shelters** - Criação de Abrigo (✅ Sucesso 201)
 ![POST Shelter Success](image-3.png)
