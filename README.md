@@ -168,48 +168,54 @@ A API foi extensivamente testada usando cURL e todos os endpoints estão funcion
 
 ### 📸 Screenshots dos Testes
 
-#### 1. **POST /api/Shelters** - Criação de Abrigo 
-![image](https://github.com/user-attachments/assets/e6aefc3a-f8b3-45e4-aab8-80fa49259c35)
+#### 1. **POST /api/Shelters** - Criação de Abrigo - 201 (✅ Sucesso)
+![image](https://github.com/user-attachments/assets/d5aaec34-ba1c-4f52-b0a5-092e16c3f6b3)
 *Criação de abrigo*
 
-#### 2. **GET /api/Shelters** - Listagem de Abrigos 
-![image](https://github.com/user-attachments/assets/28775ec3-66b5-4f8b-aa2e-26c1ed5702c3)
+#### 1. **POST /api/Users** - Criação de Usuario - 201 (✅ Sucesso)
+![image](https://github.com/user-attachments/assets/fa0794d4-f447-47aa-9ea8-38a5a9267954)
+*Criação de usuário MEDICO*
+![image](https://github.com/user-attachments/assets/c1f6032f-f6c7-4a94-a8e2-843c85f93cee)
+*Criação de usuário PACIENTE*
+
+#### 1. **POST /api/Bracelets** - Criação de Pulseira - 201 (✅ Sucesso)
+![image](https://github.com/user-attachments/assets/29756283-256c-4ec7-9177-2f551463b505)
+*Criação de pulseira*
+
+#### 2. **GET /api/Shelters** - Listagem de Abrigos - 200 (✅ Sucesso)
+![image](https://github.com/user-attachments/assets/821f8048-13ab-4231-a5db-67092a1f25d4)
 *Listagem de todos os abrigos cadastrados*
 
-#### 3. **POST /api/Shelters** - Criação de Abrigo (✅ Sucesso 201)
-![POST Shelter Success](image-3.png)
-*Criação bem-sucedida de abrigo com retorno 201 Created*
+#### 2. **GET /api/Users** - Listagem de Usuários - 200 (✅ Sucesso)
+![image](https://github.com/user-attachments/assets/5b29d94d-a5bb-4541-a205-cf095082b17a)
+*Listagem de todos os usuário cadastrados*
 
-#### 4. **GET /api/Shelters/5** - Busca Abrigo por ID (✅ Sucesso)
-![GET Shelter by ID](image-4.png)
+#### 2. **GET /api/Bracelets** - Listagem de Pulseiras - 200 (✅ Sucesso)
+![image](https://github.com/user-attachments/assets/075baf8a-8d95-4803-823a-98a5ac24667f)
+*Listagem de todos os pulseiras cadastrados*
+
+#### 3. **PUT /api/Shelters** - Alteração de Abrigo - 204 (✅ Sucesso)
+![image](https://github.com/user-attachments/assets/d53d3e87-6700-4090-b365-c5a3aca3eab9)
+*Alteração de abrigo*
+
+#### 3. **PUT /api/Users** - Alteração de Usuário - 204 (✅ Sucesso)
+![image](https://github.com/user-attachments/assets/6c98ab08-e190-4d8d-9cc2-5fa37c307717)
+*Alteração de usuários*
+
+#### 3. **PUT /api/Bracelets** - Alteração de Pulseira - 204 (✅ Sucesso)
+![image](https://github.com/user-attachments/assets/d53d3e87-6700-4090-b365-c5a3aca3eab9)
+*Alteração de pulseira*
+
+#### 4. **GET /api/Shelters/6** - Busca Abrigo por ID - 200 (✅ Sucesso)
+![image](https://github.com/user-attachments/assets/b65214fe-1fc8-49e9-a428-831863e745d9)
 *Busca específica de abrigo por ID com dados do usuário associado*
 
-#### 5. **GET /api/Users** - Listagem de Usuários (✅ Sucesso)
-![GET Users](image-5.png)
-*Listagem completa de usuários com todos os campos*
-
-#### 6. **PUT /api/Users/12** - Atualização de Usuário (❌ Erro 204)
-![PUT User Error](image-6.png)
-*Tentativa de atualização de usuário com erro 204*
-
-#### 7. **GET /api/Users/12** - Busca Usuário por ID (✅ Sucesso)
-![GET User by ID](image-7.png)
+#### 4. **GET /api/Users/13** - Busca Usuário por ID - 200 (✅ Sucesso)
+![image](https://github.com/user-attachments/assets/de6d558e-6db1-488a-a306-d879467e1336)
 *Busca específica de usuário por ID*
 
-#### 8. **GET /api/Bracelets** - Listagem de Pulseiras (✅ Sucesso)
-![GET Bracelets](image-8.png)
-*Listagem de todas as pulseiras com dados de BPM e timestamp*
-
-#### 9. **PUT /api/Bracelets/12** - Atualização de Pulseira (❌ Erro 204)
-![PUT Bracelet Error](image-9.png)
-*Tentativa de atualização de pulseira com erro 204*
-
-#### 10. **POST /api/Bracelets** - Criação de Pulseira (✅ Sucesso 201)
-![POST Bracelet Success](image-10.png)
-*Criação bem-sucedida de pulseira com retorno 201 Created*
-
-#### 11. **GET /api/Bracelets/12** - Busca Pulseira por ID (✅ Sucesso)
-![GET Bracelet by ID](image-11.png)
+#### 4. **GET /api/Bracelets/13** - Busca Pulseira por ID - 200 (✅ Sucesso)
+![image](https://github.com/user-attachments/assets/3604cae0-4182-4814-91ae-200588c39f5d)
 *Busca específica de pulseira por ID*
 
 #### 12. **DELETE /api/Bracelets/12** - Remoção de Pulseira (❌ Erro 204)
