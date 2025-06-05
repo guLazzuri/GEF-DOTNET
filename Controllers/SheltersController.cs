@@ -45,7 +45,7 @@ namespace Api.Controllers
         /// <summary>
         /// Get shelter by id
         /// </summary>
-        /// <response code="200">Return all shelters</response>
+        /// <response code="200">Return shelter</response>
         /// <response code="404">No shelter Found</response>
         /// <response code="500">Internal server error</response>        
         [HttpGet("{id}")]
