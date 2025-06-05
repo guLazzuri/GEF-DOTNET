@@ -62,7 +62,7 @@ erDiagram
 - **C#** - Linguagem de programação
 
 ## 📦 Estrutura do Projeto
-
+```
 GEF-DOTNET/
 ├── Controllers/
 │   ├── BraceletsController.cs
