@@ -278,46 +278,33 @@ dotnet run
 {
   "shelters": [
     {
-      "shelterID": 7,
-      "name": "Abrigo 07",
-      "address": "Rua Saúde, 7",
-      "quantity": 33,
-      "capacity": 77
+      "shelterID": 28, <- APENAS INFORMANDO O NUMERO DO ID
+      "name": "Teste Video",
+      "address": "Rua Teste Video, 1",
+      "quantity": 10,
+      "capacity": 100
     }
   ],
   "users": [
     {
-      "userID": 16,
-      "name": "Amanda Rodrigues",
-      "age": 41,
-      "gender": "Female",
+      "userID": 26, <- APENAS INFORMANDO O NUMERO DO ID
+      "name": "Gustavo Lazzuri,
+      "age": 20,
+      "gender": "Masculine",
       "bloodType": "APositive",
-      "weight": 66.33,
-      "responsableName": "Thiago Rodrigues",
-      "cpf": "54323456754",
-      "cardNumber": "11212",
-      "userType": "PATIENT",
-      "shelterID": 7
-    },
-    {
-      "userID": 15,
-      "name": "Felipe Pessoa",
-      "age": 23,
-      "gender": "Massculine",
-      "bloodType": "APositive",
-      "weight": 62.5,
-      "responsableName": "Julia Pessoa",
-      "cpf": "67876565421",
-      "cardNumber": "33033",
-      "userType": "DOCTOR",
-      "shelterID": 7
+      "weight": 70,
+      "responsableName": "Andrea",
+      "cpf": "123456789",
+      "cardNumber": "12345",
+      "userType": "ADMIN",
+      "shelterID": 28
     }
   ],
   "bracelets": [
     {
-      "braceletID": 14,
-      "userId": 16,
-      "lastBPM": 90,
+      "braceletID": 25, <- APENAS INFORMANDO O NUMERO DO ID
+      "userId": 26,
+      "lastBPM": 80,
       "lastUpdate": "2025-06-04T13:55:54.532Z"
     }
   ]
