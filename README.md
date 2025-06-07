@@ -278,7 +278,7 @@ dotnet run
 {
   "shelters": [
     {
-      "shelterID": 28, <- APENAS INFORMANDO O NUMERO DO ID
+      "shelterID": 28, <- APENAS INFORMANDO O NUMERO DO ID, NÃO NESCESSARIO!
       "name": "Teste Video",
       "address": "Rua Teste Video, 1",
       "quantity": 10,
@@ -287,8 +287,8 @@ dotnet run
   ],
   "users": [
     {
-      "userID": 26, <- APENAS INFORMANDO O NUMERO DO ID
-      "name": "Gustavo Lazzuri,
+      "userID": 26, <- APENAS INFORMANDO O NUMERO DO ID, NÃO NESCESSARIO!
+      "name": "Gustavo Lazzuri",
       "age": 20,
       "gender": "Masculine",
       "bloodType": "APositive",
@@ -302,7 +302,7 @@ dotnet run
   ],
   "bracelets": [
     {
-      "braceletID": 25, <- APENAS INFORMANDO O NUMERO DO ID
+      "braceletID": 25, <- APENAS INFORMANDO O NUMERO DO ID, NÃO NESCESSARIO
       "userId": 26,
       "lastBPM": 80,
       "lastUpdate": "2025-06-04T13:55:54.532Z"
