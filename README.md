@@ -99,6 +99,17 @@ GEF-DOTNET/
 └── README.md
 ```
 
+## ☁️ Como Executar o Container
+
+### 1. Execute 
+```bash
+sudo docker pull edunagado/biotag:latest
+```
+### 2. Execute
+```bash
+sudo docker run -d --name biotag-api -p 8080:8080 edunagado/biotag:latest
+``` 
+
 ## 🚀 Como Executar o Projeto
 
 ### Pré-requisitos
